@@ -1,0 +1,22 @@
+version: "3.6"
+
+networks:
+  bare-simple-slick-net:
+    driver: bridge
+
+services:
+  database:
+    container_name: bare_simple_slick_database
+    image: mariadb:10.3.10-bionic
+    volumes:
+      - ./docker/mariadb/conf:/etc/mysql/conf.d
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_USER: "testuser"
+      MYSQL_PASSWORD: "password"
+      MYSQL_DATABASE: "test1"
+      TZ: "Asia/Tokyo"
+    ports:
+      - "33306:3306"
+    networks:
+      - bare-simple-slick-net
